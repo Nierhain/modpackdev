@@ -30,7 +30,9 @@ export default function UserInfo() {
           <DropdownMenuContent>
             <DropdownMenuLabel>{user.name}</DropdownMenuLabel>
             <DropdownMenuLabel>
-              <span className="text-secondary">{user.email}</span>
+              <span className="text-sm text-muted-foreground">
+                {user.email}
+              </span>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem>

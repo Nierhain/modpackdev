@@ -14,11 +14,9 @@ export default function Menu() {
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
-          <Link href="/">
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Home
-            </NavigationMenuLink>
-          </Link>
+          <NavigationMenuLink className={navigationMenuTriggerStyle()} asChild>
+            <Link href="/">Home</Link>
+          </NavigationMenuLink>
         </NavigationMenuItem>
         <NavigationMenuItem>
           <NavigationMenuTrigger>Generators</NavigationMenuTrigger>
@@ -29,14 +27,22 @@ export default function Menu() {
                   className={`w-full ${navigationMenuTriggerStyle()}`}
                   asChild
                 >
-                  <Link href="/recipes" className="min-w-full">
+                  <Link
+                    href="/recipes"
+                    className="min-w-full"
+                  >
                     Recipes
                   </Link>
                 </NavigationMenuLink>
               </li>
               <li>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()} asChild>
-                  <Link href="/gateways">Gateways to Eternity</Link>
+                <NavigationMenuLink
+                  className={navigationMenuTriggerStyle()}
+                  asChild
+                >
+                  <Link href="/gateways">
+                    Gateways to Eternity
+                  </Link>
                 </NavigationMenuLink>
               </li>
             </ul>
