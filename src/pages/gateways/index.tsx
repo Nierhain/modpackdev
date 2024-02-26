@@ -27,14 +27,65 @@ const defaultGateRules: GateRules = {
   player_damage_only: false,
   remove_mobs_on_failurs: true,
   fail_on_out_of_bounds: false,
-  spacing: 0
-}
+  spacing: 0,
+};
 
 type SpawnAlgorithm = "gateways:open_field";
 
-interface Wave {}
-interface Reward {}
-interface Failure {}
+interface Wave {
+  entities: WaveEntity[];
+  modifiers: WaveModifier[];
+  rewards: Reward[];
+  max_wave_time: number;
+  setup_time: number;
+}
+
+type WaveEntity = {
+  type: "gateways:standard";
+  entity: string;
+  desc: string;
+  nbt: string;
+  modifiers: WaveModifier[];
+  count: number;
+};
+
+type WaveModifier =
+  | {
+      type: "gateways:mob_effect";
+    }
+  | { type: "gateways:attribute" }
+  | { type: "gateways:gear_set" };
+
+type Reward =
+  | {
+      type: "gateways:stack";
+      stack: ItemStack;
+    }
+  | {
+      type: "gateways:stack_list";
+      stacks: ItemStack[];
+    }
+  | {
+      type: "gateways:entity_loot";
+      entity: string;
+      nbt: string;
+      rolls: number;
+    };
+
+type ItemStack = {
+  item: string;
+  optional: boolean;
+  count: number;
+  nbt: string;
+  cap_nbt: string;
+};
+
+type Failure =
+  | { type: "gateways:explosion" }
+  | { type: "gateways:mob_effect" }
+  | { type: "gateways:command" }
+  | { type: "gateways:chanced" }
+  | { type: "gateways:summon" };
 
 export default function Gateways() {
   return <>Gateway Generator</>;
