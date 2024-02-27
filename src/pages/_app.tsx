@@ -1,7 +1,7 @@
 import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 import { type AppType } from "next/app";
-
+import { Provider as JotaiProvider} from "jotai";
 import { api } from "@/utils/api";
 
 import "@/styles/globals.css";
@@ -21,6 +21,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
         enableSystem
         disableTransitionOnChange
       >
+        <JotaiProvider>
         <main className="flex min-h-screen min-w-full flex-col justify-between">
           <Header />
           <div className="container flex flex-col items-center justify-between gap-12 px-4 py-16 flex-grow">
@@ -28,6 +29,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
           </div>
           <Footer />
         </main>
+        </JotaiProvider>
       </ThemeProvider>
     </SessionProvider>
   );
