@@ -19,7 +19,7 @@ export default function AddEntity() {
   const form = useForm<z.infer<typeof entitySchema>>({
     resolver: zodResolver(entitySchema),
     defaultValues: {
-      name: "Mob",
+      displayName: "Mob",
       modId: "minecraft",
       version: "1.20",
       resourceName: "mob",
@@ -35,7 +35,7 @@ export default function AddEntity() {
       >
         <FormField
           control={form.control}
-          name="name"
+          name="displayName"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Display Name</FormLabel>
