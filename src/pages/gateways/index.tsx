@@ -94,7 +94,6 @@ function Generator() {
   const [_gateway, setGateway] = useAtom(gatewayAtom);
   return (
     <div className="h-full min-h-full w-full p-4">
-      ß
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit((value) => {
@@ -264,7 +263,7 @@ function Generator() {
 }
 
 export function EntitySelect() {
-  const { data } = api.post.getEntities.useQuery();
+  const { data } = api.catalogue.getEntities.useQuery();
   return (
     <>
       <div>

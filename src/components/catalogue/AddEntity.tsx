@@ -15,7 +15,7 @@ import {
 import { Input } from "../ui/input";
 
 export default function AddEntity() {
-  const { mutate } = api.post.createEntity.useMutation();
+  const { mutate } = api.catalogue.createEntity.useMutation();
   const form = useForm<z.infer<typeof entitySchema>>({
     resolver: zodResolver(entitySchema),
     defaultValues: {
@@ -97,7 +97,9 @@ export default function AddEntity() {
             </FormItem>
           )}
         />
-        <Button type="submit" className="col-end-3">Create Entity</Button>
+        <Button type="submit" className="col-end-3">
+          Create Entity
+        </Button>
       </form>
     </Form>
   );

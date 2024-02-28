@@ -11,8 +11,8 @@ export default function EntityCard({ entity }: EntityCardProps) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="flex items-baseline gap-2">
-          <span>{entity.displayName}</span>
+        <CardTitle className="flex flex-col items-baseline gap-2">
+          <span className="text-xl">{entity.displayName}</span>
           <span className="text-sm text-muted-foreground">
             ({entity.modId}:{entity.resourceName})
           </span>
