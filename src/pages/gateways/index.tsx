@@ -66,7 +66,7 @@ export default function Gateways() {
           <GatewayTypeSelector />
         </CardTitle>
         <CardDescription>
-          For a thorough explanation of what each option does, take a look at
+          For a thorough explanation of what each option does, take a look at ''
           <br />
           the JSON schema provided in the Gateways to Eternity Github repository{" "}
           <Link
@@ -94,7 +94,6 @@ function Generator() {
   const [_gateway, setGateway] = useAtom(gatewayAtom);
   return (
     <div className="h-full min-h-full w-full p-4">
-      ß
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit((value) => {
