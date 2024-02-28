@@ -45,12 +45,19 @@ model Session {
   @@index([userId])
 }
 
+enum UserRole {
+  User
+  Moderator
+  Admin
+}
+
 model User {
   id            String    @id @default(cuid())
   name          String?
   email         String?   @unique
   emailVerified DateTime?
   image         String?
+  role          UserRole @default(User)
   accounts      Account[]
   sessions      Session[]
   Recipe        Recipe[]
@@ -81,8 +88,12 @@ model Item {
   id           String       @id @default(cuid())
   modId        String
   resourceName String
+
+  Mod Mod @relation(fields: [modId], references:[id], onDelete: Cascade)
   Ingredient   Ingredient[]
   Outputs      Output[]
+
+  @@index([modId])
 }
 
 model Ingredient {
@@ -101,4 +112,33 @@ model Output {
   item   Item   @relation(fields: [itemId], references: [id], onDelete: Cascade)
   recipes Recipe[]
   @@index([itemId])
+}
+
+model Entity {
+  id String @id @default(cuid())
+  modId String 
+  resourceName String
+  image String?
+  version String
+  displayName String
+  type EntityType @default(Mob)
+
+  mod Mod  @relation(fields: [modId], references:[id], onDelete: Cascade)
+  @@index([modId])
+}
+
+model Mod {
+  id String @id @default(cuid())
+  namespace String
+  version String
+
+  Entities Entity[]
+  Items Item[]
+}
+
+enum EntityType {
+  Mob
+  Player
+  Item
+  Other
 }

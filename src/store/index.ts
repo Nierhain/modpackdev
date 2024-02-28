@@ -6,7 +6,8 @@ import {
 } from "@/models/gateway";
 import { atom } from "jotai";
 
-export const pickedGatewayAtom = atom<"basic" | "endless">("basic");
+export type GatewayType = "basic" | "endless";
+export const pickedGatewayAtom = atom<GatewayType>("basic");
 export const gatewayAtom = atom<Gateway>(createDefaultGateway());
 export const endlessGatewayAtom = atom<EndlessGateway>(
   createDefaultEndlessGateway(),

@@ -1,3 +1,4 @@
+import { entitySchema } from "@/schemas/Entity";
 import { z } from "zod";
 
 export function createDefaultGateway(): Gateway {
@@ -5,16 +6,8 @@ export function createDefaultGateway(): Gateway {
     color: "black",
     size: "small",
     waves: [],
-    failures: [],
-    rewards: [],
-    rules: defaultGateRules,
-    spawn_algorithm: "gateways:open_field",
-    boss_event: {
-      fog: true,
-      mode: "boss_bar",
-    },
   };
-} 
+}
 
 export function createDefaultEndlessGateway(): EndlessGateway {
   return {
@@ -28,20 +21,33 @@ export function createDefaultEndlessGateway(): EndlessGateway {
       setup_time: 20,
     },
     modifiers: [],
-    failures: [],
-    rules: defaultGateRules,
-    spawn_algorithm: "gateways:open_field",
-    boss_event: {
-      fog: true,
-      mode: "boss_bar",
-    },
+  };
+}
+
+export function createDefaultWave(): Wave {
+  return {
+    entities: [],
+    max_wave_time: 20,
+    setup_time: 20,
+  };
+}
+
+export function createDefaultEntity(): WaveEntity {
+  return {
+    count: 1,
+    entity: "",
+    desc: "",
+    modifiers: [],
+    nbt: "",
+    type: "gateways:standard",
   };
 }
 
 export type Gateway = z.infer<typeof gatewaySchema>;
 export type EndlessGateway = z.infer<typeof endlessGatewaySchema>;
 export type GateRules = z.infer<typeof gateRulesSchema>;
-
+type Wave = z.infer<typeof waveSchema>;
+type WaveEntity = z.infer<typeof waveEntitySchema>;
 const defaultGateRules: GateRules = {
   spawn_range: 8,
   leash_range: 32,
@@ -63,14 +69,14 @@ const bossEventSettingsSchema = z.object({
 });
 
 const gateRulesSchema = z.object({
-  spawn_range: z.number(),
-  leash_range: z.number(),
-  allow_discarding: z.boolean(),
-  allow_dim_change: z.boolean(),
-  player_damage_only: z.boolean(),
-  remove_mobs_on_failurs: z.boolean(),
-  fail_on_out_of_bounds: z.boolean(),
-  spacing: z.number(),
+  spawn_range: z.number().optional(),
+  leash_range: z.number().optional(),
+  allow_discarding: z.boolean().optional(),
+  allow_dim_change: z.boolean().optional(),
+  player_damage_only: z.boolean().optional(),
+  remove_mobs_on_failurs: z.boolean().optional(),
+  fail_on_out_of_bounds: z.boolean().optional(),
+  spacing: z.number().optional(),
 });
 
 const spawnAlgorithmSchema = z.union([
@@ -153,8 +159,8 @@ const endlessModifierSchema = z.object({
 
 const waveSchema = z.object({
   entities: z.array(waveEntitySchema),
-  modifiers: z.array(waveModifierSchema),
-  rewards: z.array(rewardSchema),
+  modifiers: z.array(waveModifierSchema).optional(),
+  rewards: z.array(rewardSchema).optional(),
   max_wave_time: z.number(),
   setup_time: z.number(),
 });
@@ -164,19 +170,19 @@ export const endlessGatewaySchema = z.object({
   color: z.string(),
   base_wave: waveSchema,
   modifiers: z.array(endlessModifierSchema),
-  failures: z.array(failureSchema),
-  spawn_algorithm: spawnAlgorithmSchema,
-  rules: gateRulesSchema,
-  boss_event: bossEventSettingsSchema,
+  failures: z.array(failureSchema).optional(),
+  spawn_algorithm: spawnAlgorithmSchema.optional(),
+  rules: gateRulesSchema.optional(),
+  boss_event: bossEventSettingsSchema.optional(),
 });
 
 export const gatewaySchema = z.object({
   size: z.union([z.literal("small"), z.literal("medium"), z.literal("large")]),
   color: z.string(),
   waves: z.array(waveSchema),
-  rewards: z.array(rewardSchema),
-  failures: z.array(failureSchema),
-  spawn_algorithm: spawnAlgorithmSchema,
-  rules: gateRulesSchema,
-  boss_event: bossEventSettingsSchema,
+  rewards: z.array(rewardSchema).optional(),
+  failures: z.array(failureSchema).optional(),
+  spawn_algorithm: spawnAlgorithmSchema.optional(),
+  rules: gateRulesSchema.optional(),
+  boss_event: bossEventSettingsSchema.optional(),
 });
