@@ -66,7 +66,7 @@ export default function Gateways() {
           <GatewayTypeSelector />
         </CardTitle>
         <CardDescription>
-          For a thorough explanation of what each option does, take a look at ''
+          For a thorough explanation of what each option does, take a look at
           <br />
           the JSON schema provided in the Gateways to Eternity Github repository{" "}
           <Link
