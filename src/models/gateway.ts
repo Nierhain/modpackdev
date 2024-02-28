@@ -1,4 +1,3 @@
-import { entitySchema } from "@/schemas/Entity";
 import { z } from "zod";
 
 export function createDefaultGateway(): Gateway {
@@ -43,21 +42,24 @@ export function createDefaultEntity(): WaveEntity {
   };
 }
 
+export function createDefaultGateRules(): GateRules {
+  return {
+    spawn_range: 8,
+    leash_range: 32,
+    allow_discarding: false,
+    allow_dim_change: false,
+    player_damage_only: false,
+    remove_mobs_on_failurs: true,
+    fail_on_out_of_bounds: false,
+    spacing: 0,
+  };
+}
+
 export type Gateway = z.infer<typeof gatewaySchema>;
 export type EndlessGateway = z.infer<typeof endlessGatewaySchema>;
 export type GateRules = z.infer<typeof gateRulesSchema>;
 type Wave = z.infer<typeof waveSchema>;
 type WaveEntity = z.infer<typeof waveEntitySchema>;
-const defaultGateRules: GateRules = {
-  spawn_range: 8,
-  leash_range: 32,
-  allow_discarding: false,
-  allow_dim_change: false,
-  player_damage_only: false,
-  remove_mobs_on_failurs: true,
-  fail_on_out_of_bounds: false,
-  spacing: 0,
-};
 
 const applicationModeSchema = z.object({
   type: z.literal("gateways:after_wave"),

@@ -1,4 +1,4 @@
-import { Entity } from "@prisma/client";
+import type { Entity } from "@prisma/client";
 import Image from "next/image";
 import fallback from "public/fallback_image.svg";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
@@ -20,7 +20,7 @@ export default function EntityCard({ entity }: EntityCardProps) {
       </CardHeader>
       <CardContent>
         <Image
-          src={entity.image ?? fallback}
+          src={entity.image ?? fallback as string}
           width={200}
           height={300}
           alt="Image of the mob"

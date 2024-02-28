@@ -38,7 +38,7 @@ const parseEntities = (file: File | null | undefined) => {
     return;
   }
   const reader = new FileReader();
-  reader.onload = (e) => {
+  reader.onload = (_e) => {
     let content = reader.result?.toString();
     if (!content) return;
       content = content.replaceAll("<entitytype:", "").replaceAll(">", "");

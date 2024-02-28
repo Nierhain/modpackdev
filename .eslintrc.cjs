@@ -10,6 +10,7 @@ const config = {
     "plugin:@typescript-eslint/recommended-type-checked",
     "plugin:@typescript-eslint/stylistic-type-checked",
   ],
+  ignorePatterns: ["**/src/components/ui/*.tsx"],
   rules: {
     // These opinionated rules are enabled in stylistic-type-checked above.
     // Feel free to reconfigure them to your own preference.
@@ -23,7 +24,10 @@ const config = {
         fixStyle: "inline-type-imports",
       },
     ],
-    "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
+    ],
     "@typescript-eslint/require-await": "off",
     "@typescript-eslint/no-misused-promises": [
       "error",

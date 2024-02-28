@@ -4,10 +4,10 @@ import Import from "@/components/catalogue/Import";
 import { api } from "@/utils/api";
 
 export default function Catalogue() {
-  const { isLoading, isError, data } = api.post.getEntities.useQuery();
+  const { data } = api.post.getEntities.useQuery();
   return (
     <>
-      <>{data?.map((x) => <EntityCard entity={x} />)}</>
+      <>{data?.map((x) => <EntityCard entity={x} key={x.id} />)}</>
       <div>
         <AddEntity />
         <Import />

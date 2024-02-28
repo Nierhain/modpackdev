@@ -2,7 +2,7 @@ import { entitySchema } from "@/schemas/Entity";
 import { api } from "@/utils/api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import type { z } from "zod";
 import { Button } from "../ui/button";
 import {
   FormField,

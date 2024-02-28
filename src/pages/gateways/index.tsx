@@ -8,15 +8,14 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import {
-  EndlessGateway,
-  Gateway,
+  type Gateway,
   gatewaySchema,
   createDefaultGateway,
   createDefaultWave,
   createDefaultEntity,
 } from "@/models/gateway";
 import {
-  GatewayType,
+  type GatewayType,
   endlessGatewayAtom,
   gatewayAtom,
   pickedGatewayAtom,
@@ -25,11 +24,9 @@ import JsonView from "@uiw/react-json-view";
 import { nordTheme } from "@uiw/react-json-view/nord";
 import { useAtom } from "jotai";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -52,12 +49,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import {
-  ChevronsUpDown,
-  HelpCircle,
-  MessageCircleQuestion,
-  MessageCircleQuestionIcon,
-} from "lucide-react";
+import { ChevronsUpDown, HelpCircle } from "lucide-react";
 import { api } from "@/utils/api";
 import {
   Collapsible,
@@ -99,7 +91,7 @@ function Generator() {
     resolver: zodResolver(gatewaySchema),
     defaultValues: createDefaultGateway(),
   });
-  const [gateway, setGateway] = useAtom(gatewayAtom);
+  const [_gateway, setGateway] = useAtom(gatewayAtom);
   return (
     <div className="h-full min-h-full w-full p-4">
       ß
@@ -149,8 +141,8 @@ function Generator() {
                           <HelpCircle className="w-4" />
                         </TooltipTrigger>
                         <TooltipContent>
-                          Can be any minecraft color or hex code (e.g '#ff0000'
-                          or 'red' for red)
+                          Can be any minecraft color or hex code (e.g
+                          &apos;#ff0000&apos; or &apos;red&apos; for red)
                         </TooltipContent>
                       </Tooltip>
                     </TooltipProvider>
@@ -240,7 +232,7 @@ function Generator() {
                                 Entities
                                 {field.value[index]?.entities.map(
                                   (entity, entityIndex) => (
-                                    <Collapsible>
+                                    <Collapsible key={entityIndex}>
                                       <CollapsibleTrigger>
                                         Entity {entityIndex} ({entity.entity})
                                       </CollapsibleTrigger>
@@ -271,7 +263,7 @@ function Generator() {
   );
 }
 
-function EntitySelect() {
+export function EntitySelect() {
   const { data } = api.post.getEntities.useQuery();
   return (
     <>
@@ -283,7 +275,7 @@ function EntitySelect() {
           </SelectTrigger>
           <SelectContent>
             {data?.map((x) => (
-              <SelectItem value={`${x.modId}:${x.resourceName}`}>
+              <SelectItem key={x.id} value={`${x.modId}:${x.resourceName}`}>
                 {x.displayName}
               </SelectItem>
             ))}

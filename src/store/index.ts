@@ -1,6 +1,6 @@
 import {
-  EndlessGateway,
-  Gateway,
+  type EndlessGateway,
+  type Gateway,
   createDefaultEndlessGateway,
   createDefaultGateway,
 } from "@/models/gateway";
